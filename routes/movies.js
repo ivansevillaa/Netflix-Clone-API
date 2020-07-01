@@ -38,10 +38,10 @@ function moviesApi(app) {
   });
 
   router.post('/', async (req, res, next) => {
-    const { body: newMovie } = req;
+    const { body: movie } = req;
 
     try {
-      const createdMovie = await movieService.createMovie(newMovie);
+      const createdMovie = await movieService.createMovie(movie);
 
       res.status(201).send({
         error: false,
@@ -54,10 +54,11 @@ function moviesApi(app) {
   });
 
   router.patch('/:movieId', async (req, res, next) => {
+    const { body: movieData } = req;
     const { movieId } = req.params;
 
     try {
-      const updatedMovie = await movieService.updateMovie(movieId);
+      const updatedMovie = await movieService.updateMovie(movieId, movieData);
 
       res.status(200).send({
         error: false,
@@ -73,12 +74,12 @@ function moviesApi(app) {
     const { movieId } = req.params;
 
     try {
-      const deletedMovieId = await movieService.deleteMovie(movieId);
+      await movieService.deleteMovie(movieId);
 
       res.status(200).send({
         error: false,
         message: 'Movie deleted succesfully',
-        data: deletedMovieId,
+        data: {},
       });
     } catch (err) {
       next(err);

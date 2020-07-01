@@ -1,40 +1,42 @@
-const moviesMock = require('../utils/mocks/movies');
+const Movies = require('../lib/models/movies');
 
 async function listMovies(genre) {
-  if (genre) {
-    // code to filter by the genre
-    const filteredMovies = await Promise.resolve(moviesMock[0]);
+  let movies;
 
-    return filteredMovies;
+  if (genre) {
+    movies = await Movies.find({ genre });
   }
 
-  const movies = await Promise.resolve(moviesMock);
+  movies = await Movies.find();
 
   return movies;
 }
 
 async function getMovie(movieId) {
-  const movie = await Promise.resolve(moviesMock[0]);
+  const movie = await Movies.findById(movieId);
 
   return movie;
 }
 
-async function createMovie(newMovie) {
-  const createdMovie = await Promise.resolve(moviesMock[0]);
+async function createMovie(movie) {
+  const newMovie = new Movies(movie);
+  const createdMovie = await newMovie.save();
 
   return createdMovie;
 }
 
-async function updateMovie(movieId) {
-  const updatedMovie = await Promise.resolve(moviesMock[0]);
+async function updateMovie(movieId, movieData) {
+  const updatedMovie = await Movies.findOneAndUpdate(
+    { _id: movieId },
+    { $set: movieData },
+    { new: true }
+  );
 
   return updatedMovie;
 }
 
 async function deleteMovie(movieId) {
-  const deletedMovieId = await Promise.resolve(moviesMock[0].id);
-
-  return deletedMovieId;
+  await Movies.deleteOne({ _id: movieId });
 }
 
 module.exports = {
