@@ -4,7 +4,7 @@
   "description": "api for my netflix clone",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon index.js",
+    "dev": "SET DEBUG=app:* & nodemon index.js",
     "start": "SET NODE_ENV=production & node index.js"
   },
   "keywords": [
