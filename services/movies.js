@@ -1,3 +1,4 @@
+const boom = require('@hapi/boom');
 const Movies = require('../lib/models/movies');
 
 async function listMovies(genre) {
@@ -5,15 +6,19 @@ async function listMovies(genre) {
 
   if (genre) {
     movies = await Movies.find({ genre });
+  } else {
+    movies = await Movies.find();
   }
-
-  movies = await Movies.find();
 
   return movies;
 }
 
 async function getMovie(movieId) {
   const movie = await Movies.findById(movieId);
+
+  if (!movie) {
+    throw boom.notFound('Movie not found');
+  }
 
   return movie;
 }
@@ -32,11 +37,21 @@ async function updateMovie(movieId, movieData) {
     { new: true }
   );
 
+  if (!updatedMovie) {
+    throw boom.notFound('Movie not found');
+  }
+
   return updatedMovie;
 }
 
 async function deleteMovie(movieId) {
-  await Movies.deleteOne({ _id: movieId });
+  const movie = await Movies.findById(movieId);
+
+  if (movie) {
+    await Movies.deleteOne(movie);
+  } else {
+    throw boom.notFound('Movie not found');
+  }
 }
 
 module.exports = {

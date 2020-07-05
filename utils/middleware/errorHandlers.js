@@ -31,7 +31,7 @@ function errorHandler(err, req, res, next) {
     output: { statusCode, payload },
   } = err;
 
-  res.status(statusCode || 500).json(withErrorStack(payload, err.stack));
+  res.status(statusCode).json(withErrorStack(payload, err.stack));
 }
 
 module.exports = {
