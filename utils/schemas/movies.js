@@ -8,9 +8,13 @@ const movieVideoSrcSchema = joi.string().uri();
 const movieDurationSchema = joi.number().min(1).max(720);
 const movieYearSchema = joi.number().min(1888).max(2020);
 const movieAgeRateSchema = joi.number().max(18);
-// TODO
-// const movieGenresSchema = joi.array().items();
-// const movieAuthorsSchema = joi.array().items();
+const movieGenresSchema = joi
+  .array()
+  .items(joi.string().regex(/^[0-9a-fA-F]{24}$/)); // mongodb id regex
+const movieAuthorNameSchema = joi.string().min(1).max(12);
+const movieAuthorSurnameSchema = joi.string().min(1).max(12);
+const movieAuthorPositionSchema = joi.string().min(1).max(12);
+const movieAuthorsSchema = joi.array();
 
 const createMovieSchema = {
   title: movieTitleSchema.required(),
@@ -20,9 +24,14 @@ const createMovieSchema = {
   duration: movieDurationSchema.required(),
   year: movieYearSchema.required(),
   age_rate: movieAgeRateSchema.required(),
-  // TODO
-  // genres: movieGenresSchema.required(),
-  // authors: movieAuthorsSchema.required(),
+  genres: movieGenresSchema.required(),
+  authors: movieAuthorsSchema
+    .items({
+      name: movieAuthorNameSchema.required(),
+      surname: movieAuthorSurnameSchema.required(),
+      position: movieAuthorPositionSchema.required(),
+    })
+    .required(),
 };
 
 const updateMovieSchema = {
@@ -33,9 +42,12 @@ const updateMovieSchema = {
   duration: movieDurationSchema,
   year: movieYearSchema,
   age_rate: movieAgeRateSchema,
-  // TODO
-  // genres: movieGenresSchema,
-  // authors: movieAuthorsSchema,
+  genres: movieGenresSchema,
+  authors: movieAuthorsSchema.items({
+    name: movieAuthorNameSchema,
+    surname: movieAuthorSurnameSchema,
+    position: movieAuthorPositionSchema,
+  }),
 };
 
 module.exports = {

@@ -1,20 +1,23 @@
+/* eslint-disable comma-dangle */
 const boom = require('@hapi/boom');
 const Movies = require('../lib/models/movies');
 
 async function listMovies(genre) {
-  let movies;
+  let filter = {};
 
   if (genre) {
-    movies = await Movies.find({ genre });
-  } else {
-    movies = await Movies.find();
+    filter = {
+      genre,
+    };
   }
+
+  const movies = await Movies.find(filter).populate('genres');
 
   return movies;
 }
 
 async function getMovie(movieId) {
-  const movie = await Movies.findById(movieId);
+  const movie = await Movies.findById(movieId).populate('genres');
 
   if (!movie) {
     throw boom.notFound('Movie not found');
