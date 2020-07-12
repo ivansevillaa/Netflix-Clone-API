@@ -1,3 +1,4 @@
+/* eslint-disable comma-dangle */
 const boom = require('@hapi/boom');
 const bcrypt = require('bcrypt');
 const Users = require('../lib/models/users');
@@ -10,7 +11,7 @@ async function listUsers() {
 
 async function getUser(email) {
   const user = await Users.find({ email });
-  if (!user) {
+  if (!user.length) {
     throw boom.notFound('User not found');
   }
 
@@ -19,12 +20,12 @@ async function getUser(email) {
 
 async function createUser(user) {
   const email = await Users.find({ email: user.email });
-  if (email) {
+  if (email.length) {
     throw boom.conflict('Email already exists');
   }
 
   const username = await Users.find({ username: user.username });
-  if (username) {
+  if (username.length) {
     throw boom.conflict('Username already exists');
   }
 

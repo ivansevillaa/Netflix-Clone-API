@@ -19,10 +19,12 @@ async function getGenre(genreId) {
 }
 
 async function createGenre(genre) {
-  // const isExistent = Genres.find({ genre: genre.genre });
-  // if (isExistent) {
-  //   throw boom.conflict('This genre already exists');
-  // }
+  console.log(genre.genre);
+  const isExistent = await Genres.find({ genre: genre.genre });
+
+  if (isExistent.length) {
+    throw boom.conflict('This genre already exists');
+  }
 
   const newGenre = new Genres(genre);
   const createdGenre = await newGenre.save();
