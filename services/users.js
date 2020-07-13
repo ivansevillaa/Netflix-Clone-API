@@ -12,7 +12,8 @@ async function listUsers() {
 async function getUser(email) {
   const user = await Users.find({ email });
   if (!user.length) {
-    throw boom.notFound('User not found');
+    // user not exist
+    return false;
   }
 
   return user;
