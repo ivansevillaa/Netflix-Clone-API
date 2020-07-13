@@ -13,7 +13,7 @@ async function getUser(email) {
   const user = await Users.find({ email });
   if (!user.length) {
     // user not exist
-    return false;
+    return null;
   }
 
   return user;

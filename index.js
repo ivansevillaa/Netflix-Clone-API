@@ -2,6 +2,7 @@ const express = require('express');
 const config = require('./config/index');
 const moviesApi = require('./routes/movies');
 const genresApi = require('./routes/genres');
+const authApi = require('./routes/auth');
 const mongo = require('./lib/mongo');
 const {
   logErrors,
@@ -19,6 +20,7 @@ mongo();
 app.use(express.json());
 
 // routes
+authApi(app);
 moviesApi(app);
 genresApi(app);
 

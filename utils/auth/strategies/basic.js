@@ -9,13 +9,14 @@ passport.use(
   // eslint-disable-next-line consistent-return
   new BasicStrategy(async (email, password, cb) => {
     try {
-      const user = userService.getUser(email);
-
+      const user = await userService.getUser(email);
       if (!user) {
         return cb(boom.unauthorized(), false);
       }
 
-      if (!(await bcrypt.compare(password, user.password))) {
+      const match = await bcrypt.compare(password, user[0].password);
+
+      if (!match) {
         return cb(boom.unauthorized(), false);
       }
 
