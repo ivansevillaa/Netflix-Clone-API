@@ -9,6 +9,7 @@ const {
   updateMovieSchema,
 } = require('../utils/schemas/movies');
 const validationHandler = require('../utils/middleware/validationHandler');
+const scopesValidationHandler = require('../utils/middleware/scopesValidationHandler');
 
 // JWT strategy
 require('../utils/auth/strategies/jwt');
@@ -17,11 +18,17 @@ function moviesApi(app) {
   const router = express.Router();
   app.use('/movies', router);
 
-  router.get('/', passport.authenticate('jwt', { session: false }), listMovies);
+  router.get(
+    '/',
+    passport.authenticate('jwt', { session: false }),
+    scopesValidationHandler(['read:movies']),
+    listMovies
+  );
 
   router.get(
     '/:movieId',
     passport.authenticate('jwt', { session: false }),
+    scopesValidationHandler(['read:movies']),
     validationHandler({ movieId: movieIdSchema }, 'params'),
     getMovie
   );
@@ -29,6 +36,7 @@ function moviesApi(app) {
   router.post(
     '/',
     passport.authenticate('jwt', { session: false }),
+    scopesValidationHandler(['create:movies']),
     validationHandler(createMovieSchema),
     createMovie
   );
@@ -37,6 +45,7 @@ function moviesApi(app) {
     '/:movieId',
     passport.authenticate('jwt', { session: false }),
     validationHandler({ movieId: movieIdSchema }, 'params'),
+    scopesValidationHandler(['update:movies']),
     validationHandler(updateMovieSchema),
     updateMovie
   );
@@ -44,6 +53,7 @@ function moviesApi(app) {
   router.delete(
     '/:movieId',
     passport.authenticate('jwt', { session: false }),
+    scopesValidationHandler(['delete:movies']),
     validationHandler({ movieId: movieIdSchema }, 'params'),
     deleteMovie
   );

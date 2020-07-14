@@ -5,6 +5,7 @@ const passport = require('passport');
 const genreService = require('../services/genres');
 const { genreIdSchema, genreSchema } = require('../utils/schemas/genres');
 const validationHandler = require('../utils/middleware/validationHandler');
+const scopesValidationHandler = require('../utils/middleware/scopesValidationHandler');
 
 // JWT strategy
 require('../utils/auth/strategies/jwt');
@@ -13,11 +14,17 @@ function genresApi(app) {
   const router = express.Router();
   app.use('/genres', router);
 
-  router.get('/', passport.authenticate('jwt', { session: false }), listMovies);
+  router.get(
+    '/',
+    passport.authenticate('jwt', { session: false }),
+    scopesValidationHandler(['read:genres']),
+    listMovies
+  );
 
   router.get(
     '/:genreId',
     passport.authenticate('jwt', { session: false }),
+    scopesValidationHandler(['read:genres']),
     validationHandler({ genreId: genreIdSchema }, 'params'),
     getGenre
   );
@@ -25,13 +32,16 @@ function genresApi(app) {
   router.post(
     '/',
     passport.authenticate('jwt', { session: false }),
+    scopesValidationHandler(['create:genres']),
     validationHandler(genreSchema),
+
     createGenre
   );
 
   router.patch(
     '/:genreId',
     passport.authenticate('jwt', { session: false }),
+    scopesValidationHandler(['update:genres']),
     validationHandler({ genreId: genreIdSchema }, 'params'),
     validationHandler(genreSchema),
     updateGenre
@@ -40,6 +50,7 @@ function genresApi(app) {
   router.delete(
     '/:genreId',
     passport.authenticate('jwt', { session: false }),
+    scopesValidationHandler(['delete:genres']),
     validationHandler({ genreId: genreIdSchema }, 'params'),
     deleteGenre
   );
