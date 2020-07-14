@@ -14,7 +14,7 @@ passport.use(
   // eslint-disable-next-line consistent-return
   new Strategy(options, async (jwtPayload, cb) => {
     try {
-      const user = userService.getUser({ email: jwtPayload.email });
+      const user = await userService.getUser(jwtPayload.email);
       if (!user) {
         return cb(boom(boom.unauthorized()), false);
       }

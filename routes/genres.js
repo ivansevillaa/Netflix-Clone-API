@@ -1,26 +1,37 @@
 /* eslint-disable no-use-before-define */
 /* eslint-disable comma-dangle */
 const express = require('express');
+const passport = require('passport');
 const genreService = require('../services/genres');
 const { genreIdSchema, genreSchema } = require('../utils/schemas/genres');
 const validationHandler = require('../utils/middleware/validationHandler');
+
+// JWT strategy
+require('../utils/auth/strategies/jwt');
 
 function genresApi(app) {
   const router = express.Router();
   app.use('/genres', router);
 
-  router.get('/', listMovies);
+  router.get('/', passport.authenticate('jwt', { session: false }), listMovies);
 
   router.get(
     '/:genreId',
+    passport.authenticate('jwt', { session: false }),
     validationHandler({ genreId: genreIdSchema }, 'params'),
     getGenre
   );
 
-  router.post('/', validationHandler(genreSchema), createGenre);
+  router.post(
+    '/',
+    passport.authenticate('jwt', { session: false }),
+    validationHandler(genreSchema),
+    createGenre
+  );
 
   router.patch(
     '/:genreId',
+    passport.authenticate('jwt', { session: false }),
     validationHandler({ genreId: genreIdSchema }, 'params'),
     validationHandler(genreSchema),
     updateGenre
@@ -28,6 +39,7 @@ function genresApi(app) {
 
   router.delete(
     '/:genreId',
+    passport.authenticate('jwt', { session: false }),
     validationHandler({ genreId: genreIdSchema }, 'params'),
     deleteGenre
   );

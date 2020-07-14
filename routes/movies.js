@@ -1,6 +1,7 @@
 /* eslint-disable no-use-before-define */
 /* eslint-disable comma-dangle */
 const express = require('express');
+const passport = require('passport');
 const movieService = require('../services/movies');
 const {
   movieIdSchema,
@@ -9,22 +10,32 @@ const {
 } = require('../utils/schemas/movies');
 const validationHandler = require('../utils/middleware/validationHandler');
 
+// JWT strategy
+require('../utils/auth/strategies/jwt');
+
 function moviesApi(app) {
   const router = express.Router();
   app.use('/movies', router);
 
-  router.get('/', listMovies);
+  router.get('/', passport.authenticate('jwt', { session: false }), listMovies);
 
   router.get(
     '/:movieId',
+    passport.authenticate('jwt', { session: false }),
     validationHandler({ movieId: movieIdSchema }, 'params'),
     getMovie
   );
 
-  router.post('/', validationHandler(createMovieSchema), createMovie);
+  router.post(
+    '/',
+    passport.authenticate('jwt', { session: false }),
+    validationHandler(createMovieSchema),
+    createMovie
+  );
 
   router.patch(
     '/:movieId',
+    passport.authenticate('jwt', { session: false }),
     validationHandler({ movieId: movieIdSchema }, 'params'),
     validationHandler(updateMovieSchema),
     updateMovie
@@ -32,6 +43,7 @@ function moviesApi(app) {
 
   router.delete(
     '/:movieId',
+    passport.authenticate('jwt', { session: false }),
     validationHandler({ movieId: movieIdSchema }, 'params'),
     deleteMovie
   );
