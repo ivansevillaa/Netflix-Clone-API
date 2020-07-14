@@ -38,7 +38,13 @@ async function createUser(user) {
   });
   const createdUser = await newUser.save();
 
-  return createdUser;
+  const returnData = {
+    id: createdUser._id,
+    email: createdUser.email,
+    username: createdUser.username,
+  };
+
+  return returnData;
 }
 
 async function updateUser(userId, userData) {
