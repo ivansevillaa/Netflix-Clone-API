@@ -4,6 +4,7 @@ const movieIdSchema = joi.string().regex(/^[0-9a-fA-F]{24}$/); // mongodb id reg
 const movieTitleSchema = joi.string().max(52);
 const movieDescriptionSchema = joi.string().max(300);
 const movieCoverSrcSchema = joi.string().uri();
+const movieLogoSrcSchema = joi.string().uri();
 const movieVideoSrcSchema = joi.string().uri();
 const movieDurationSchema = joi.number().min(1).max(720);
 const movieYearSchema = joi.number().min(1888).max(2020);
@@ -20,6 +21,7 @@ const createMovieSchema = {
   title: movieTitleSchema.required(),
   description: movieDescriptionSchema.required(),
   cover_src: movieCoverSrcSchema.required(),
+  logo_src: movieLogoSrcSchema.required(),
   video_src: movieVideoSrcSchema.required(),
   duration: movieDurationSchema.required(),
   year: movieYearSchema.required(),
@@ -38,6 +40,7 @@ const updateMovieSchema = {
   title: movieTitleSchema,
   description: movieDescriptionSchema,
   cover_src: movieCoverSrcSchema,
+  logo_src: movieLogoSrcSchema,
   video_src: movieVideoSrcSchema,
   duration: movieDurationSchema,
   year: movieYearSchema,

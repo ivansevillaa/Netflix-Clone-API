@@ -4,6 +4,7 @@ const moviesMock = [
     description:
       'Nullam sit amet turpis elementum ligula vehicula consequat. Morbi a ipsum. Integer a nibh.\n\nIn quis justo. Maecenas rhoncus aliquam lacus. Morbi quis tortor id nulla ultrices aliquet.',
     cover_src: 'http://dummyimage.com/177x175.bmp/dddddd/000000',
+    logo_src: 'http://dummyimage.com/177x175.bmp/dddddd/000000',
     video_src: 'https://wufoo.com/nulla/suscipit.png',
     duration: 382,
     year: 1997,
@@ -61,6 +62,7 @@ const moviesMock = [
     description:
       'Morbi porttitor lorem id ligula. Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sit amet, sem.',
     cover_src: 'http://dummyimage.com/200x167.png/ff4444/ffffff',
+    logo_src: 'http://dummyimage.com/200x167.png/ff4444/ffffff',
     video_src: 'http://ustream.tv/rutrum/neque/aenean/auctor.html',
     duration: 204,
     year: 1998,
@@ -108,6 +110,7 @@ const moviesMock = [
     description:
       'Praesent id massa id nisl venenatis lacinia. Aenean sit amet justo. Morbi ut odio.',
     cover_src: 'http://dummyimage.com/127x147.png/5fa2dd/ffffff',
+    logo_src: 'http://dummyimage.com/127x147.png/5fa2dd/ffffff',
     video_src: 'http://mashable.com/elementum/ligula/vehicula.jsp',
     duration: 164,
     year: 2000,
@@ -175,6 +178,7 @@ const moviesMock = [
     description:
       'In congue. Etiam justo. Etiam pretium iaculis justo.\n\nIn hac habitasse platea dictumst. Etiam faucibus cursus urna. Ut tellus.',
     cover_src: 'http://dummyimage.com/211x183.bmp/ff4444/ffffff',
+    logo_src: 'http://dummyimage.com/211x183.bmp/ff4444/ffffff',
     video_src: 'https://illinois.edu/maecenas/tincidunt/lacus/at.jsp',
     duration: 240,
     year: 1996,
@@ -242,6 +246,7 @@ const moviesMock = [
     description:
       'Morbi porttitor lorem id ligula. Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sit amet, sem.\n\nFusce consequat. Nulla nisl. Nunc nisl.',
     cover_src: 'http://dummyimage.com/143x244.bmp/ff4444/ffffff',
+    logo_src: 'http://dummyimage.com/143x244.bmp/ff4444/ffffff',
     video_src: 'https://ocn.ne.jp/metus/sapien/ut/nunc.json',
     duration: 318,
     year: 1998,
@@ -279,6 +284,7 @@ const moviesMock = [
     description:
       'Pellentesque at nulla. Suspendisse potenti. Cras in purus eu magna vulputate luctus.',
     cover_src: 'http://dummyimage.com/175x223.bmp/ff4444/ffffff',
+    logo_src: 'http://dummyimage.com/175x223.bmp/ff4444/ffffff',
     video_src: 'https://answers.com/vitae/nisl/aenean/lectus.aspx',
     duration: 317,
     year: 2006,
@@ -331,6 +337,7 @@ const moviesMock = [
     description:
       'Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem.\n\nSed sagittis. Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci. Nullam molestie nibh in lectus.\n\nPellentesque at nulla. Suspendisse potenti. Cras in purus eu magna vulputate luctus.',
     cover_src: 'http://dummyimage.com/146x151.jpg/ff4444/ffffff',
+    logo_src: 'http://dummyimage.com/146x151.jpg/ff4444/ffffff',
     video_src:
       'https://istockphoto.com/ante/vivamus/tortor/duis/mattis/egestas/metus.html',
     duration: 298,
@@ -384,6 +391,7 @@ const moviesMock = [
     description:
       'In hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante. Nulla justo.',
     cover_src: 'http://dummyimage.com/178x115.png/dddddd/000000',
+    logo_src: 'http://dummyimage.com/178x115.png/dddddd/000000',
     video_src: 'http://yahoo.com/vestibulum/ante/ipsum/primis/in.json',
     duration: 354,
     year: 1993,
@@ -416,6 +424,7 @@ const moviesMock = [
     description:
       'Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi. Integer ac neque.\n\nDuis bibendum. Morbi non quam nec dui luctus rutrum. Nulla tellus.\n\nIn sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus.',
     cover_src: 'http://dummyimage.com/123x126.png/cc0000/ffffff',
+    logo_src: 'http://dummyimage.com/123x126.png/cc0000/ffffff',
     video_src:
       'https://reddit.com/ligula/vehicula/consequat/morbi/a/ipsum.aspx',
     duration: 128,
@@ -484,6 +493,7 @@ const moviesMock = [
     description:
       'In hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante. Nulla justo.\n\nAliquam quis turpis eget elit sodales scelerisque. Mauris sit amet eros. Suspendisse accumsan tortor quis turpis.\n\nSed ante. Vivamus tortor. Duis mattis egestas metus.',
     cover_src: 'http://dummyimage.com/162x111.jpg/5fa2dd/ffffff',
+    logo_src: 'http://dummyimage.com/162x111.jpg/5fa2dd/ffffff',
     video_src:
       'http://disqus.com/sapien/quis/libero/nullam/sit/amet/turpis.jsp',
     duration: 381,
